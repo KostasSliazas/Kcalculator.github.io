@@ -81,7 +81,7 @@
       n1.length = 0
 
       if (n2 && lastop) {
-        result = cal(parseFloat(n2), parseFloat(result), cals[lastop])
+        result = ((parseFloat(n2) % 1 !== 0) || (parseFloat(result) % 1 !== 0)) ? (cal((parseFloat(n2) % 1 !== 0) ? parseFloat(n2) * 10 : parseFloat(n2), (parseFloat(result) % 1 !== 0) ? parseFloat(result) * 10 : parseFloat(result), cals[lastop]) / 10) : cal(parseFloat(n2), parseFloat(result), cals[lastop])
       }
 
       n2 = result
