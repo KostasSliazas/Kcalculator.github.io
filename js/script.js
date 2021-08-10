@@ -9,10 +9,10 @@
   let operator = null
   let lastopOperator = null
   let result = 0
-  const add = (n, o) => (n % 1 !== 0 && o % 1 !== 0) ? ((n * 10) + (o * 10)) / 10 : n + o
+  const add = (n, o) => (n % 1 !== 0 || o % 1 !== 0) ? ((n * 10) + (o * 10)) / 10 : n + o
   const sub = (n, o) => (n % 1 !== 0 || o % 1 !== 0) ? ((n * 10) - (o * 10)) / 10 : n - o
-  const div = (n, o) => n / o
-  const mul = (n, o) => n * o
+  const div = (n, o) => (n % 1 !== 0 && o % 1 !== 0 && n !== o) ? ((n * 10) / (o * 10)) / 100 : n / o
+  const mul = (n, o) => (n % 1 !== 0 || o % 1 !== 0) ? ((n * 10) * (o * 10)) / 100 : n * o
   const res = n => n
 
   const cal = (num1, num2, calback) => {
