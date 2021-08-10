@@ -9,16 +9,15 @@
   let operator = null
   let lastopOperator = null
   let result = 0
-
-  const add = (n, o) => n + o
-  const sub = (n, o) => n - o
+  const add = (n, o) => (n % 1 !== 0 && o % 1 !== 0) ? ((n * 10) + (o * 10)) / 10 : n + o
+  const sub = (n, o) => (n % 1 !== 0 || o % 1 !== 0) ? ((n * 10) - (o * 10)) / 10 : n - o
   const div = (n, o) => n / o
   const mul = (n, o) => n * o
   const res = n => n
 
   const cal = (num1, num2, calback) => {
     if (typeof calback === 'function') {
-      return (parseFloat(num1) % 1 === 0 && parseFloat(num2) % 1 === 0) ? calback(num1, num2) : (parseFloat(num1) % 1 !== 0 && parseFloat(num2) % 1 !== 0) ? calback(num1 * 10, num2 * 10) / 10 : (parseFloat(num1) % 1 !== 0 && parseFloat(num2) % 1 === 0) ? calback(num1 * 10, num2) / 10 : calback(num1, num2 * 10) / 10
+      return calback(num1, num2)
     }
   }
 
@@ -66,7 +65,9 @@
     if (operator === '/' || operator === '*' || operator === '+' || operator === '-' || operator === '=') {
       if (lastopOperator === operator) return false
       firstNumber.length = 0
-      if (secondNumber && lastopOperator) result = cal(parseFloat(secondNumber), parseFloat(result), cals[lastopOperator])
+      if (secondNumber && lastopOperator) {
+        result = cal(parseFloat(secondNumber), parseFloat(result), cals[lastopOperator])
+      }
       secondNumber = result
       lastopOperator = res(operator)
     }
